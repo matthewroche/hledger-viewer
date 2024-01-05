@@ -36,7 +36,7 @@
       
       const parsedData = await response.json();
       
-      headers.value = parsedData[0].slice(1).map(date => {
+      headers.value = parsedData[0].slice(1).map((date: string|number|Date) => {
         const d = new Date(date)
         switch (periodValues.value.interval) {
           case 'day':
@@ -49,8 +49,8 @@
         
       });
 
-      const assetsIndex = parsedData.findIndex(row => row[0] === 'Assets');
-      const liabilitiesIndex = parsedData.findIndex(row => row[0] === 'Liabilities')
+      const assetsIndex = parsedData.findIndex((row: string[]) => row[0] === 'Assets');
+      const liabilitiesIndex = parsedData.findIndex((row: string[]) => row[0] === 'Liabilities')
 
       assets.value = parsedData.slice(assetsIndex + 1, liabilitiesIndex);
       liabilities.value = parsedData.slice(liabilitiesIndex + 1, parsedData.length - 2);

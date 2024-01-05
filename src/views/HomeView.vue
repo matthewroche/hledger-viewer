@@ -1,7 +1,5 @@
 <script setup lang="ts">
 
-import Vue, { ref, onMounted } from 'vue'
-
 </script>
 
 <template>

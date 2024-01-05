@@ -1,9 +1,7 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
 const papa = require('papaparse')
 const { exec } = require('child_process');
-const { log } = require('console');
 var Readable = require('stream').Readable
 
 const app = express();
@@ -73,8 +71,6 @@ const createBashCommandWithPeriodValues = (command, queryValues, res) => {
 const handleExec = (command, req, res, callback) => {
 
   const bashCommand = createBashCommandWithPeriodValues(command, req.query, res)
-
-  console.log(bashCommand);
 
   if (bashCommand == false) {
     return

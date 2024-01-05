@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-  import Vue, { ref, onMounted, watch } from 'vue'
+  import { ref, onMounted, watch } from 'vue'
   import moment from 'moment'
   import PeriodSelector from '../components/PeriodSelector.vue'
 
@@ -87,7 +87,7 @@
       switch (periodValues.value.interval) {
         case 'day': chartCategories = parsedData['dates']; break;
         case 'month': chartCategories = parsedData['dates']; break;
-        case 'year': chartCategories = parsedData['dates'].map((x) => {
+        case 'year': chartCategories = parsedData['dates'].map((x: string) => {
             return x.split("-")[0]
           }); break;
       }
@@ -102,9 +102,9 @@
           }
         }
       }
-      series.value[0].data = parsedData['Income'].map((x) => Number(x.replace(/[^0-9.-]+/g,""))); //Removing cuurency sympol and converting string to number
-      series.value[1].data = parsedData['Expenses'].map((x) => Number(x.replace(/[^0-9.-]+/g,"")));
-      series.value[2].data = parsedData['total'].map((x) => Number(x.replace(/[^0-9.-]+/g,"")));
+      series.value[0].data = parsedData['Income'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,""))); //Removing cuurency sympol and converting string to number
+      series.value[1].data = parsedData['Expenses'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,"")));
+      series.value[2].data = parsedData['total'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,"")));
       
 
     } catch (error) {

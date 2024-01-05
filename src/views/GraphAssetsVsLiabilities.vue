@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-  import Vue, { ref, onMounted, watch } from 'vue'
+  import { ref, onMounted, watch } from 'vue'
   import moment from 'moment'
   import PeriodSelector from '../components/PeriodSelector.vue'
 
@@ -79,15 +79,13 @@
       }));
       const parsedData = await response.json();
 
-      console.log(parsedData);
-
       const chartType = periodValues.value.interval == 'day' ? 'datetime' : 'category'
       
       let chartCategories = parsedData['dates']
       switch (periodValues.value.interval) {
         case 'day': chartCategories = parsedData['dates']; break;
         case 'month': chartCategories = parsedData['dates']; break;
-        case 'year': chartCategories = parsedData['dates'].map((x) => {
+        case 'year': chartCategories = parsedData['dates'].map((x: string) => {
             return x.split("-")[0]
           }); break;
       }
@@ -97,14 +95,13 @@
         ...{
           xaxis: {
             type: chartType,
-            categories: chartCategories,
-            tickAmount: 10
+            categories: chartCategories
           }
         }
       }
-      series.value[0].data = parsedData['Assets'].map((x) => Number(x.replace(/[^0-9.-]+/g,""))); //Removing cuurency sympol and converting string to number
-      series.value[1].data = parsedData['Liabilities'].map((x) => Number(x.replace(/[^0-9.-]+/g,"")));
-      series.value[2].data = parsedData['Total'].map((x) => Number(x.replace(/[^0-9.-]+/g,"")));
+      series.value[0].data = parsedData['Assets'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,""))); //Removing cuurency sympol and converting string to number
+      series.value[1].data = parsedData['Liabilities'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,"")));
+      series.value[2].data = parsedData['Total'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,"")));
       
 
     } catch (error) {

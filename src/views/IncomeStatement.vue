@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-  import Vue, { ref, onMounted, watch } from 'vue'
+  import { ref, onMounted, watch } from 'vue'
   import PeriodSelector from '../components/PeriodSelector.vue'
   import moment from 'moment'
   import { VueToPrint } from "vue-to-print";
@@ -36,7 +36,7 @@
       
       const parsedData = await response.json();
 
-      headers.value = parsedData[0].slice(1).map(date => {
+      headers.value = parsedData[0].slice(1).map((date: string) => {
         let d = new Date(date)
         switch (periodValues.value.interval) {
           case 'day':
@@ -49,8 +49,8 @@
         }
       });
 
-      const revenuesIndex = parsedData.findIndex(row => row[0] === 'Revenues');
-      const expensesIndex = parsedData.findIndex(row => row[0] === 'Expenses')
+      const revenuesIndex = parsedData.findIndex((row: string[]) => row[0] === 'Revenues');
+      const expensesIndex = parsedData.findIndex((row: string[]) => row[0] === 'Expenses')
 
       revenues.value = parsedData.slice(revenuesIndex + 1, expensesIndex);
       expenses.value = parsedData.slice(expensesIndex + 1, parsedData.length - 1);

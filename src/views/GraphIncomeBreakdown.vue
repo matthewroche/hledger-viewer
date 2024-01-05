@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-  import Vue, { Ref, ref, onMounted, watch } from 'vue'
+  import { type Ref, ref, onMounted, watch } from 'vue'
   import moment from 'moment'
   import PeriodSelector from '../components/PeriodSelector.vue'
 
@@ -65,7 +65,7 @@
       series.value = []
       Object.keys(parsedData).forEach(element => {
         if (element != 'dates' && element != 'total') {
-            series.value.push({"name": element, "data": parsedData[element].map((x) => Number(x.replace(/[^0-9.-]+/g,"")))})
+            series.value.push({"name": element, "data": parsedData[element].map((x: string) => Number(x.replace(/[^0-9.-]+/g,"")))})
         }
       });
       

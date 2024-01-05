@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-  import Vue, { ref, onMounted, watch } from 'vue'
+  import { ref, onMounted, watch } from 'vue'
   import moment from 'moment'
   import PeriodSelector from '../components/PeriodSelector.vue'
 
@@ -60,11 +60,11 @@
       let chartCategories = parsedData[0]
       switch (periodValues.value.interval) {
         case 'day': chartCategories = parsedData[0]; break;
-        case 'month': chartCategories = parsedData[0].map((x) => {
+        case 'month': chartCategories = parsedData[0].map((x: string|number|Date) => {
             const d = new Date(x)
             return d.toLocaleDateString('default', {month: 'long'})
           }); break;
-        case 'year': chartCategories = parsedData[0].map((x) => {
+        case 'year': chartCategories = parsedData[0].map((x: string|number|Date) => {
             const d = new Date(x)
             return d.toLocaleDateString('default', {year: 'numeric'})
           }); break;
@@ -80,7 +80,7 @@
           }
         }
       }
-      series.value[0].data = parsedData[1].map((x) => Number(x.replace(/[^0-9.-]+/g,""))); //Removing cuurency sympol and converting string to number
+      series.value[0].data = parsedData[1].map((x: string) => Number(x.replace(/[^0-9.-]+/g,""))); //Removing cuurency sympol and converting string to number
     } catch (error) {
       console.error(error);
     }

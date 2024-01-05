@@ -1,10 +1,11 @@
-<script setup>
+<script async setup lang="ts">
     defineProps(['periodValues'])
     defineEmits(['update:periodValues'])
 </script>
 
 <template>
-  <div class="flex m-4 justify-around">
+  <main>
+    <div class="flex m-4 justify-around">
       <div>
         <p>From:</p>
         <input
@@ -64,4 +65,5 @@
         </div>
       </div>
     </div>
+  </main>
 </template>
