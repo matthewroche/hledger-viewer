@@ -3,13 +3,14 @@
   import { type Ref, ref, onMounted, watch } from 'vue'
   import moment from 'moment'
   import PeriodSelector from '../components/PeriodSelector.vue'
+  import { type ApexOptions } from 'apexcharts'
 
   const periodValues = ref({
     startDate: moment().subtract(2, 'month').startOf('month').format("YYYY-MM-DD").toString(),
     endDate: moment().startOf('month').format("YYYY-MM-DD").toString(),
     interval: 'month'
   })
-  const chartOptions = ref({
+  const chartOptions: Ref<ApexOptions> = ref({
         chart: {
           id: "expenses-breakdown-graph",
           toolbar: {
