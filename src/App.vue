@@ -5,7 +5,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header class="container mx-auto m-10">  
-    <router-link to="/" class="text-3xl">hLedger Visualisation</router-link>
+    <router-link to="/" class="text-3xl">hLedger Viewer</router-link>
   </header>
 
   <RouterView class="container mx-auto m-10"/>
