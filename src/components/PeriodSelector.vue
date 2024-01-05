@@ -11,7 +11,11 @@
         <input
           type="date" 
           :value="periodValues.startDate"
-          @input="$emit('update:periodValues', {...periodValues,startDate: $event.target.value})"
+          @input=" event => {
+            let target = event.target as HTMLInputElement
+            let value = target.value || ''
+            $emit('update:periodValues', {...periodValues,startDate: value})
+          }"
         />
       </div>
       <div class="flex flex-col">
@@ -19,7 +23,11 @@
         <input
           type="date" 
           :value="periodValues.endDate"
-          @input="$emit('update:periodValues', {...periodValues,endDate: $event.target.value})"
+          @input=" event => {
+            let target = event.target as HTMLInputElement
+            let value = target.value || ''
+            $emit('update:periodValues', {...periodValues,endDate: value})
+          }"
         />
       </div>
       <div class="flex flex-col">
