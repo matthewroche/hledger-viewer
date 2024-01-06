@@ -10,7 +10,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "build-release": "rm -rf dist && npm run build && pkg -t node16 ."
+    "build-release": "rm -rf dist && npm run build && pkg -t node16-macos-x64,node16-macos-arm64,node16-linux,node16-alpine --out-path ./build ."
   },
   "dependencies": {
     "apexcharts": "^3.44.2",
