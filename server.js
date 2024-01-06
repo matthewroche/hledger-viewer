@@ -90,8 +90,6 @@ const handleExec = (command, req, res, callback) => {
     return
   }
 
-  console.log(bashCommand);
-
   exec(bashCommand, (err, stdout, stderr) => {
 
     // Handle errors
