@@ -13,7 +13,6 @@ if (portIndex > -1) {
   // Retrieve the value after --custom
   port = process.argv[portIndex + 1];
 }
-port = process.env.PORT || 3200;
 // Set up origin from command line
 let origin = [];
 const originIndex = process.argv.indexOf('--origin');
