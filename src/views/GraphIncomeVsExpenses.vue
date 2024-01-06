@@ -105,7 +105,7 @@
       }
       series.value[0].data = parsedData['Income'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,""))); //Removing cuurency sympol and converting string to number
       series.value[1].data = parsedData['Expenses'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,"")));
-      series.value[2].data = parsedData['total'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,"")));
+      series.value[2].data = parsedData['Total'].map((x: string) => Number(x.replace(/[^0-9.-]+/g,"")));
       
 
     } catch (error) {
