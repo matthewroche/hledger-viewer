@@ -80,8 +80,6 @@
       }));
       const parsedData = await response.json();
 
-      console.log(parsedData);
-
       const chartType = periodValues.value.interval == 'day' ? 'datetime' : 'category'
       
       let chartCategories = parsedData['dates']

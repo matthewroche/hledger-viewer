@@ -90,6 +90,8 @@ const handleExec = (command, req, res, callback) => {
     return
   }
 
+  console.log(bashCommand);
+
   exec(bashCommand, (err, stdout, stderr) => {
 
     // Handle errors
@@ -160,7 +162,7 @@ app.get('/api/balance-sheet', (req, res) => {
 
 app.get('/api/balance-sheet-equity', (req, res) => {
 
-  handleExec('bse', req, res, (data) => {
+  handleExec("bse -R --infer-equity --alias '/^(revenues|income|expenses)\\b/=equity' not:desc:'closing balances'", req, res, (data) => {
     data.splice(0,1) //Remove header
     res.json(data);
   })

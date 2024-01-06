@@ -56,8 +56,8 @@
 
       assets.value = parsedData.slice(assetsIndex + 1, liabilitiesIndex);
       liabilities.value = parsedData.slice(liabilitiesIndex + 1, equityIndex);
-      equity.value = parsedData.slice(equityIndex + 1, parsedData.length - 2);
-      net.value = parsedData.slice(-2, -1)[0]
+      equity.value = parsedData.slice(equityIndex + 1, parsedData.length - 1);
+      net.value = parsedData.slice(-1)[0]
       
     } catch (error) {
       console.error(error);
