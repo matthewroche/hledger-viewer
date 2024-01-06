@@ -19,7 +19,6 @@
     "express": "^4.18.2",
     "moment": "^2.29.4",
     "papaparse": "^5.4.1",
-    "pinia": "^2.1.7",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5",
     "vue-to-print": "^1.1.0",
@@ -49,7 +48,12 @@
   "pkg": {
     "scripts": "dist/**/*.js",
     "assets": "dist/**/*",
-    "targets": [ "node16-macos-x64", "node16-macos-arm64", "node16-linux", "node16-alpine" ],
+    "targets": [
+      "node16-macos-x64",
+      "node16-macos-arm64",
+      "node16-linux",
+      "node16-alpine"
+    ],
     "outputPath": "build"
   }
 }
