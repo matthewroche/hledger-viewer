@@ -2,10 +2,25 @@ const express = require('express');
 const path = require('path');
 const papa = require('papaparse')
 const { exec } = require('child_process');
-var Readable = require('stream').Readable
+var Readable = require('stream').Readable;
+const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 3200;
+// Set up port from command line
+const portIndex = process.argv.indexOf('--port');
+let port = 3200
+if (portIndex > -1) {
+  // Retrieve the value after --custom
+  port = process.argv[portIndex + 1];
+}
+port = process.env.PORT || 3200;
+// Set up origin from command line
+let origin = [];
+const originIndex = process.argv.indexOf('--origin');
+if (originIndex > -1) {
+  // Retrieve the value after --custom
+  origin = [process.argv[originIndex + 1]];
+}
 
 const intervalParser = (interval) => {
   if (typeof(interval) != 'string') {
@@ -133,6 +148,7 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     next();
   })
+app.use(cors({ origin: ["http://localhost:5173"].concat(origin) }));
 
 app.get('/api/balance-sheet', (req, res) => {
 
@@ -279,6 +295,6 @@ app.get('*', (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
+app.listen(port, 'localhost', () => {
   console.log(`Server is running on port ${port}`);
 });
