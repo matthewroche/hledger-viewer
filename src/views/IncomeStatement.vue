@@ -69,11 +69,11 @@
 <template>
   <main>
 
-    <h1 class="text-xl mb-8">Income Statement</h1>
-    <PeriodSelector v-model:periodValues="periodValues" class="mb-10"/>
+    <h1 class="text-xl md:mb-8">Income Statement</h1>
+    <PeriodSelector class="my-4" v-model:periodValues="periodValues" class="mb-10"/>
     <hr />
 
-    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll">
+    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll px-5">
 
       <div v-if="revenues.length > 0" class="basis-1/3 shrink-0">
 

@@ -114,16 +114,18 @@
 </script>
 
 <template>
-  <main>
+  <main class="flex flex-col h-full">
 
     <h1 class="text-xl mb-4">Income vs Expenses</h1>
     <PeriodSelector v-model:periodValues="periodValues" />
-    <apexchart
-      width="100%"
-      type="line"
-      :options="chartOptions"
-      :series="series"
-    ></apexchart>
-
+    <div class="w-full md:w-8/12 mx-auto flex-grow">
+      <apexchart
+        width="100%"
+        heigh="100%"
+        type="line"
+        :options="chartOptions"
+        :series="series"
+      ></apexchart>
+    </div>
   </main>
 </template>

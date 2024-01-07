@@ -48,6 +48,7 @@
         }
         
       });
+      console.log(headers.value)
 
       const assetsIndex = parsedData.findIndex((row: string[]) => row[0] === 'Assets');
       const liabilitiesIndex = parsedData.findIndex((row: string[]) => row[0] === 'Liabilities')
@@ -70,10 +71,10 @@
 <template>
   <main>
 
-    <h1 class="text-xl mb-8">Balance Sheet</h1>
-    <PeriodSelector v-model:periodValues="periodValues"/>
+    <h1 class="text-xl md:mb-8">Balance Sheet</h1>
+    <PeriodSelector class="my-4" v-model:periodValues="periodValues"/>
     <hr />
-    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll">
+    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-y-scroll px-5">
 
       <div v-if="assets.length > 0" class="basis-1/3 shrink-0">
 
@@ -93,6 +94,7 @@
 
       <div v-for="(period, index) in headers" v-bind:key="index" class="flex flex-col basis-1/6 shrink-0 items-end">
         <p class="font-bold">{{period}}</p>
+        <p v-if="period == undefined" class="opacity-0">Undefined</p>
 
         <p class="opacity-0">Hidden</p>
         <p v-for="(asset, assetIndex) in assets" v-bind:key="assetIndex" class="capitalize">{{ asset[index+1] }}</p>

@@ -73,11 +73,11 @@
 <template>
   <main>
 
-    <h1 class="text-xl mb-8">Balance Sheet Equity</h1>
-    <PeriodSelector v-model:periodValues="periodValues" />
+    <h1 class="text-xl md:mb-8">Balance Sheet Equity</h1>
+    <PeriodSelector class="my-4" v-model:periodValues="periodValues" />
     <hr />
 
-    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll">
+    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll px-5">
 
       <div v-if="assets.length > 0" class="basis-1/3 shrink-0">
 

@@ -5,9 +5,10 @@
 
 <template>
   <main>
-    <div class="flex m-4 justify-around">
-      <div>
+    <div class="flex md:m-4 justify-around flex-col md:flex-row">
+      <div class="flex md:flex-col">
         <p>From:</p>
+        <div class="flex-grow md:hidden"></div>
         <input
           type="date" 
           :value="periodValues.startDate"
@@ -18,8 +19,9 @@
           }"
         />
       </div>
-      <div class="flex flex-col">
+      <div class="flex md:flex-col">
         <p>To:</p>
+        <div class="flex-grow md:hidden"></div>
         <input
           type="date" 
           :value="periodValues.endDate"
@@ -30,47 +32,19 @@
           }"
         />
       </div>
-      <div class="flex flex-col">
-        <div>
-          <input 
-            type="radio" 
-            id="none" 
-            value="none" 
-            :checked="periodValues.interval == 'none'"
-            @change="$emit('update:periodValues', {...periodValues,interval: 'none'})"
-            class="mr-5"/>
-          <label for="day">None</label>  
-        </div>
-        <div>
-          <input 
-            type="radio" 
-            id="day" 
-            value="day" 
-            :checked="periodValues.interval == 'day'"
-            @change="$emit('update:periodValues', {...periodValues,interval: 'day'})"
-            class="mr-5"/>
-          <label for="day">Day</label>  
-        </div>
-        <div>
-          <input 
-            type="radio" 
-            id="month" 
-            value="month" 
-            :checked="periodValues.interval == 'month'"
-            @change="$emit('update:periodValues', {...periodValues,interval: 'month'})"
-            class="mr-5"/>
-          <label for="month">Month</label>
-        </div>
-        <div>
-          <input 
-            type="radio" 
-            id="year" 
-            value="year" 
-            :checked="periodValues.interval == 'year'"
-            @change="$emit('update:periodValues', {...periodValues,interval: 'year'})"
-            class="mr-5"/>
-          <label for="year">Year</label>
-        </div>
+      <div class="flex md:flex-col items-center md:items-start">
+        <p>Interval:</p>
+        <div class="flex-grow md:hidden"></div>
+        <select @change="event => {
+          let target = event.target as HTMLInputElement
+          let value = target.value || ''
+          $emit('update:periodValues', {...periodValues,interval: value})
+        }">
+        <option value="none" :selected="periodValues.interval == 'none'" @change="$emit('update:periodValues', {...periodValues,interval: 'none'})">None</option>
+        <option value="day" :selected="periodValues.interval == 'day'" @change="$emit('update:periodValues', {...periodValues,interval: 'day'})">Day</option>
+        <option value="month" :selected="periodValues.interval == 'month'" @change="$emit('update:periodValues', {...periodValues,interval: 'month'})">Month</option>
+        <option value="year" :selected="periodValues.interval == 'year'" @change="$emit('update:periodValues', {...periodValues,interval: 'year'})">Year</option>
+      </select>
       </div>
     </div>
   </main>
