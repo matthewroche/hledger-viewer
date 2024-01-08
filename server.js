@@ -101,38 +101,29 @@ const handleExec = (command, req, res, callback) => {
 
     } else {
 
-      // Handle errors
-      if (err | stderr.length != 0) {
-        console.log("Error running hledger");
-        console.error(err)
-        console.log(`stderr: ${stderr}`);
-        res.status(500).send('Internal Server Error');
+      // Stream data into PapaParser
+      var dataStream = new Readable() // Turning string into stream
+      dataStream.push(stdout)
+      dataStream.push(null)
+      const parseStream = papa.parse(papa.NODE_STREAM_INPUT);
+      dataStream.pipe(parseStream);
 
-      } else {
-        // Stream data into PapaParser
-        var dataStream = new Readable() // Turning string into stream
-        dataStream.push(stdout)
-        dataStream.push(null)
-        const parseStream = papa.parse(papa.NODE_STREAM_INPUT);
-        dataStream.pipe(parseStream);
+      // Accepet parsed data
+      let data = [];
+      parseStream.on("data", chunk => {
+          data.push(chunk);
+      });
 
-        // Accepet parsed data
-        let data = [];
-        parseStream.on("data", chunk => {
-            data.push(chunk);
-        });
+      // Handle errors parsing
+      parseStream.on("error", () => {
+          console.log("Error parsing CSV"),
+          res.status(500).send('Internal Server Error');
+      })
 
-        // Handle errors parsing
-        parseStream.on("error", () => {
-            console.log("Error parsing CSV"),
-            res.status(500).send('Internal Server Error');
-        })
-
-        // Handle data
-        parseStream.on("finish", () => {
-          callback(data)
-        });
-    }
+      // Handle data
+      parseStream.on("finish", () => {
+        callback(data)
+      });
   }})
   
 }
@@ -148,6 +139,47 @@ app.use((req, res, next) => {
     next();
   })
 app.use(cors({ origin: ["http://localhost:5173"].concat(origin) }));
+
+app.get('/api/stats', (req, res) => {
+
+  exec('hledger stats', (err, stdout, stderr) => {
+
+    // Handle errors
+    if (err | stderr.length != 0) {
+      console.log("Error running hledger");
+      console.error(err)
+      console.log(`stderr: ${stderr}`);
+      res.status(500).send('Internal Server Error');
+
+    } else {
+
+      let data = {}
+
+      let mainFileMatch = stdout.match(/Main file.+/gm) || ['']
+      data.mainFile = mainFileMatch[0].substring(mainFileMatch[0].indexOf(':') + 2)
+
+      let transactionsSpanMatch = stdout.match(/Transactions span.+/gm) || ['']
+      data.transactionsSpan = transactionsSpanMatch[0].substring(transactionsSpanMatch[0].indexOf(':') + 2)
+
+      let lastTransactionMatch = stdout.match(/Last transaction.+/gm) || ['']
+      data.lastTransaction = lastTransactionMatch[0].substring(lastTransactionMatch[0].indexOf(':') + 2)
+
+      let transactionsCountMatch = stdout.match(/^Transactions\s\s.+/gm) || ['']
+      data.transactionsCount = transactionsCountMatch[0].substring(transactionsCountMatch[0].indexOf(':') + 2)
+
+      let accountsCountMatch = stdout.match(/^Accounts.+/gm) || ['']
+      data.accountsCount = accountsCountMatch[0].substring(accountsCountMatch[0].indexOf(':') + 2)
+
+      let commoditiesCountMatch = stdout.match(/^Commodities.+/gm) || ['']
+      data.commoditiesCount = commoditiesCountMatch[0].substring(commoditiesCountMatch[0].indexOf(':') + 2)
+
+      res.json(data)
+
+    }
+
+  })
+
+})
 
 app.get('/api/balance-sheet', (req, res) => {
 

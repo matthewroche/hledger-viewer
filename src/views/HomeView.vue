@@ -1,29 +1,72 @@
 <script setup lang="ts">
 
+import { ref, onMounted } from 'vue'
+
+const hledgerAccessible = ref(true)
+const mainFile = ref('')
+const transactionsCount = ref('')
+const lastTransaction = ref('')
+const accountsCount = ref('')
+const commoditiesCount = ref('')
+
+
+const getData = async () => {
+    const isProd = window.location.href != 'http://localhost:5173/'
+    const path = isProd ? "" : "http://localhost:3200"
+    try {
+      const response = await fetch(path+'/api/stats');
+
+      let output = await response.json()
+
+      mainFile.value = output.mainFile
+      transactionsCount.value = output.transactionsCount
+      lastTransaction.value = output.lastTransaction
+      accountsCount.value = output.accountsCount
+      commoditiesCount.value = output.commoditiesCount
+      
+    } catch (error) {
+      console.error(error);
+      hledgerAccessible.value = false
+    }
+  }
+
+  onMounted(async () => {
+    getData()
+  })
+
 </script>
 
 <template>
-  <main>
+  <main class="">
 
-    <h1 class="text-xl mb-4">Home</h1>
-    <hr />
-    <h3 class="text-l my-4">Statements</h3>
-    <div class="flex mb-4">
-      <router-link to="/balance-sheet" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Balance Sheet</router-link>
-      <router-link to="/balance-sheet-equity" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Balance Sheet Equity</router-link>
-      <router-link to="/income-statement" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Income Statement</router-link>
-      <router-link to="/cash-flow" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Cash Flow</router-link>
+    <div v-if="hledgerAccessible">
+      <p class="text-xl mb-5">Statistics</p>
+      <div class="flex flex-col md:flex-row mb-2">
+        <p class="font-bold mr-5">Main File:</p>
+        <p>{{ mainFile }}</p>
+      </div>
+      <div class="flex flex-col md:flex-row mb-2">
+        <p class="font-bold mr-5">Transactions:</p>
+        <p>{{ transactionsCount }}</p>
+      </div>
+      <div class="flex flex-col md:flex-row mb-2">
+        <p class="font-bold mr-5">Last Transaction:</p>
+        <p>{{ lastTransaction }}</p>
+      </div>
+      <div class="flex flex-col md:flex-row mb-2">
+        <p class="font-bold mr-5">Accounts:</p>
+        <p>{{ accountsCount }}</p>
+      </div>
+      <div class="flex flex-col md:flex-row mb-2">
+        <p class="font-bold mr-5">Commodities:</p>
+        <p>{{ commoditiesCount }}</p>
+      </div>
+    </div>
 
+    <div v-if="!hledgerAccessible">
+      <p>Hledger not accessible</p>
     </div>
-    <hr />
-    <h3 class="text-l my-4">Graphs</h3>
-    <div class="flex">
-      <router-link to="/graphs/net-worth" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Net Worth</router-link>
-      <router-link to="/graphs/expenses-breakdown" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Expenses Breakdown</router-link>
-      <router-link to="/graphs/income-breakdown" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Income Breakdown</router-link>
-      <router-link to="/graphs/income-vs-expenses" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Income Vs Expenses</router-link>
-      <router-link to="/graphs/assets-vs-liabilities" class="mx-4 p-2 border-2 rounded-lg hover:bg-slate-200">Assets Vs Liabilities</router-link>
-    </div>
+    
 
   </main>
 </template>

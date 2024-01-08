@@ -24,7 +24,7 @@ watch(
       <p class="md:hidden rotate-90 hover:bg-slate-200 p-2 rounded" @click="menuOpen = !menuOpen">||||</p>
     </header>
     <div class="w-screen flex flex-grow relative overflow-hidden">
-      <div class="w-3/4 md:w-1/4 p-5 border-r-2 absolute top-0 bottom-0 overflow-scroll transition-all ease-in-out delay-150" :class="menuOpen === true ? 'translate-x-0' : '-translate-x-full'">
+      <div class="w-3/4 md:w-1/4 p-5 border-r-2 absolute top-0 bottom-0 overflow-scroll md:translate-x-0 transition-all ease-in-out delay-150" :class="menuOpen === true ? 'translate-x-0' : '-translate-x-full'">
           <p class="text-lg font-medium">Statements</p>
           <router-link to="/balance-sheet"><p class="hover:bg-slate-200 ml-5">Balance Sheet</p></router-link>
           <router-link to="/balance-sheet-equity"><p class="hover:bg-slate-200 ml-5">Balance Sheet Equity</p></router-link>
