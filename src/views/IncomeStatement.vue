@@ -70,7 +70,7 @@
   <main>
 
     <h1 class="text-xl md:mb-8">Income Statement</h1>
-    <PeriodSelector class="my-4" v-model:periodValues="periodValues" class="mb-10"/>
+    <PeriodSelector class="my-4" v-model:periodValues="periodValues"/>
     <hr />
 
     <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll px-5">
