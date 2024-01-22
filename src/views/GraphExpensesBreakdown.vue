@@ -44,7 +44,7 @@
   })
 
   const getData = (async () => {
-    const isProd = window.location.href != 'http://localhost:5173/graphs/expenses-breakdown'
+    const isProd = import.meta.env.PROD
     const path = isProd ? "" : "http://localhost:3200"
     try {
       const response = await fetch(path+'/api/graphs/expenses-breakdown?' + new URLSearchParams({

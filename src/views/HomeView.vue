@@ -11,7 +11,7 @@ const commoditiesCount = ref('')
 
 
 const getData = async () => {
-    const isProd = window.location.href != 'http://localhost:5173/'
+    const isProd = import.meta.env.PROD
     const path = isProd ? "" : "http://localhost:3200"
     try {
       const response = await fetch(path+'/api/stats');

@@ -24,7 +24,7 @@
   })
 
   const getData = async () => {
-    const isProd = window.location.href != 'http://localhost:5173/cash-flow'
+    const isProd = import.meta.env.PROD
     const path = isProd ? "" : "http://localhost:3200"
     try {
       const response = await fetch(path+'/api/cash-flow?' + new URLSearchParams({
