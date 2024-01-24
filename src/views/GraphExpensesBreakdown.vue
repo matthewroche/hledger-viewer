@@ -79,7 +79,7 @@
 
 <template>
   <main class="h-full flex flex-col">
-    <h1 class="text-xl mb-4 pt-5 pl-5">Expenses Breakdown</h1>
+    <h1 class="text-xl mb-4 pt-5 pl-5 font-bold">Expenses Breakdown</h1>
     <PeriodSelector class="px-5" v-model:periodValues="periodValues" />
     <div class="w-full md:w-8/12 mx-auto flex-grow">
       <apexchart

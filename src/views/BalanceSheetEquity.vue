@@ -73,7 +73,7 @@
 <template>
   <main>
 
-    <h1 class="text-xl md:mb-8 pt-5 pl-5">Balance Sheet Equity</h1>
+    <h1 class="text-xl md:mb-8 pt-5 pl-5 font-bold">Balance Sheet Equity</h1>
     <PeriodSelector class="my-4 px-5" v-model:periodValues="periodValues" />
     <hr />
 
