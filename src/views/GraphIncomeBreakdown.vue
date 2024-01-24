@@ -45,7 +45,7 @@
 
   const getData = (async () => {
     const isProd = import.meta.env.PROD
-    const path = isProd ? "" : "http://localhost:3200"
+    const path = isProd ? "" : ("http://" + window.location.hostname + ":3200")
     try {
       const response = await fetch(path+'/api/graphs/income-breakdown?' + new URLSearchParams({
         startDate: periodValues.value.startDate,
