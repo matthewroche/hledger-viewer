@@ -6,7 +6,7 @@
 <template>
   <main>
     <div class="flex md:m-4 justify-around flex-col md:flex-row">
-      <div class="flex md:flex-col">
+      <div class="flex md:flex-col mb-2 md:mb-0">
         <p>From:</p>
         <div class="flex-grow md:hidden"></div>
         <input
@@ -19,7 +19,7 @@
           }"
         />
       </div>
-      <div class="flex md:flex-col">
+      <div class="flex md:flex-col mb-2 md:mb-0">
         <p>To:</p>
         <div class="flex-grow md:hidden"></div>
         <input
