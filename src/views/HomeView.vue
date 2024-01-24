@@ -40,7 +40,7 @@ const getData = async () => {
 <template>
   <main class="">
 
-    <div v-if="hledgerAccessible">
+    <div v-if="hledgerAccessible" class="p-5">
       <p class="text-xl mb-5">Statistics</p>
       <div class="flex flex-col md:flex-row mb-2">
         <p class="font-bold mr-5">Main File:</p>

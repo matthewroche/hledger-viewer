@@ -73,13 +73,13 @@
 <template>
   <main>
 
-    <h1 class="text-xl md:mb-8">Balance Sheet Equity</h1>
-    <PeriodSelector class="my-4" v-model:periodValues="periodValues" />
+    <h1 class="text-xl md:mb-8 pt-5 pl-5">Balance Sheet Equity</h1>
+    <PeriodSelector class="my-4 px-5" v-model:periodValues="periodValues" />
     <hr />
 
-    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll px-5">
+    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll">
 
-      <div v-if="assets.length > 0" class="basis-1/3 shrink-0">
+      <div v-if="assets.length > 0" class="basis-1/3 shrink-0 ml-5 mr-10">
 
         <p class="opacity-0">Hidden</p>
 
@@ -98,7 +98,7 @@
 
       <div class="grow"></div>
 
-      <div v-for="(period, index) in headers" v-bind:key="index" class="flex flex-col basis-1/6 shrink-0 items-end">
+      <div v-for="(period, index) in headers" v-bind:key="index" class="flex flex-col basis-1/6 shrink-0 items-end pr-10">
         <p class="font-bold">{{period}}</p>
 
         <p class="opacity-0">Hidden</p>
@@ -121,7 +121,7 @@
     >
       <template #trigger>
         <div class="w-full flex justify-end">
-          <button class="mt-10 p-2 border-2 rounded-lg hover:bg-slate-200">Print</button>
+          <button class="m-5 p-2 border-2 rounded-lg hover:bg-slate-200">Print</button>
         </div>
       </template>
     </vue-to-print>

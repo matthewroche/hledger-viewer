@@ -17,7 +17,7 @@ watch(
 </script>
 
 <template>
-  <div class="w-screen h-screen flex flex-col">
+  <div class="w-screen flex flex-col" style="height: 100svh;">
     <header class="w-full py-4 md:py-8 px-4 md:px-10 sticky top-0 bg-white border-b-2 z-50 flex items-center">  
       <router-link to="/" class="text-xl md:text-3xl font-bold">hLedger Viewer</router-link>
       <div class="flex-grow"></div>
@@ -39,7 +39,7 @@ watch(
           <router-link to="/graphs/assets-vs-liabilities"><div class="hover:bg-slate-200 ml-5 h-10 p-2 rounded-lg flex items-center"><p>Assets vs Liabilities</p></div></router-link>
           <router-link to="/graphs/net-worth"><div class="hover:bg-slate-200 ml-5 h-10 p-2 rounded-lg flex items-center"><p>Net Worth</p></div></router-link>
       </div>
-      <div class="p-5 md:left-1/4 absolute top-0 bottom-0 overflow-scroll w-full md:w-3/4 transition-all ease-in-out delay-150" :class="menuOpen === true ? 'translate-x-3/4 opacity-25' : 'translate-x-0'">
+      <div class="md:left-1/4 absolute top-0 bottom-0 overflow-scroll w-full md:w-3/4 transition-all ease-in-out delay-150" :class="menuOpen === true ? 'translate-x-3/4 opacity-25' : 'translate-x-0'">
         <RouterView />
       </div>
     </div>
