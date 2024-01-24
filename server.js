@@ -20,6 +20,13 @@ if (originIndex > -1) {
   // Retrieve the value after --custom
   origin = [process.argv[originIndex + 1]];
 }
+// Handle dev scenario
+let isDev = false;
+const devIndex = process.argv.indexOf('--dev');
+if (devIndex > -1) {
+  // Retrieve the value after --custom
+  isDev = true;
+}
 
 const intervalParser = (interval) => {
   if (typeof(interval) != 'string') {
@@ -133,7 +140,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Avoid CORS issues
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     next();
@@ -326,6 +332,6 @@ app.get('*', (req, res) => {
 });
 
 // Start the server
-app.listen(port, 'localhost', () => {
+app.listen(port, isDev ? undefined : 'localhost', () => {
   console.log(`Server is running on port ${port}`);
 });
