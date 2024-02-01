@@ -121,7 +121,7 @@
     <div class="w-full md:w-8/12 mx-auto flex-grow">
       <apexchart
         width="100%"
-        heigh="100%"
+        height="100%"
         type="line"
         :options="chartOptions"
         :series="series"
