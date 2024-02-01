@@ -74,35 +74,39 @@
     <PeriodSelector class="my-4 px-5" v-model:periodValues="periodValues" />
     <hr />
 
-    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll">
+    <div ref="contentToPrint" class="pt-10 w-full overflow-y-scroll">
+      <p class="hidden text-3xl font-bold pl-5">Cash Flow</p>
+      <div class="flex flex-row">
 
-      <div v-if="cashFlows.length > 0" class="basis-1/3 shrink-0 ml-5 mr-10">
+        <div v-if="cashFlows.length > 0" class="basis-1/3 shrink-0 ml-5 mr-10">
 
-        <p class="opacity-0">Hidden</p>
+          <p class="opacity-0">Hidden</p>
 
-        <p class="font-bold">Cash Flows</p>
-        <p v-for="(revenue, index) in cashFlows" v-bind:key="index" class="capitalize">{{ revenue[0] }}</p>
+          <p class="font-bold">Cash Flows</p>
+          <p v-for="(revenue, index) in cashFlows" v-bind:key="index" class="capitalize">{{ revenue[0] }}</p>
 
-        <p class="font-bold mt-5">Net</p>
+          <p class="font-bold mt-5">Net</p>
 
-      </div>
+        </div>
 
-      <div class="grow"></div>
+        <div class="grow"></div>
 
-      <div v-for="(period, index) in headers" v-bind:key="index" class="flex flex-col basis-1/6 shrink-0 items-end pr-10">
-        <p class="font-bold">{{period}}</p>
+        <div v-for="(period, index) in headers" v-bind:key="index" class="flex flex-col basis-1/6 shrink-0 items-end pr-10">
+          <p class="font-bold">{{period}}</p>
 
-        <p class="opacity-0">Hidden</p>
-        <p v-for="(revenue, revenueIndex) in cashFlows" v-bind:key="revenueIndex" class="capitalize">{{ revenue[index+1] }}</p>
+          <p class="opacity-0">Hidden</p>
+          <p v-for="(revenue, revenueIndex) in cashFlows" v-bind:key="revenueIndex" class="capitalize">{{ revenue[index+1] }}</p>
 
-        <p class="mt-5">{{ net[index+1] }}</p>
+          <p class="mt-5">{{ net[index+1] }}</p>
 
+        </div>
       </div>
     </div>
     <vue-to-print
       :content="getComponentToPrint"
       document-title="Balance Sheet"
       remove-after-print
+      pageStyle="p {display: block !important;}"
     >
       <template #trigger>
         <div class="w-full flex justify-end">

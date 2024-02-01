@@ -77,47 +77,51 @@
     <PeriodSelector class="my-4 px-5" v-model:periodValues="periodValues" />
     <hr />
 
-    <div ref="contentToPrint" class="flex flex-row pt-10 w-full overflow-scroll">
+    <div ref="contentToPrint" class="pt-10 w-full overflow-y-scroll">
+      <p class="hidden text-3xl font-bold pl-5">Balance Sheet Equity</p>
+      <div class="flex flex-row">
 
-      <div v-if="assets.length > 0" class="basis-1/3 shrink-0 ml-5 mr-10">
+        <div v-if="assets.length > 0" class="basis-1/3 shrink-0 ml-5 mr-10">
 
-        <p class="opacity-0">Hidden</p>
+          <p class="opacity-0">Hidden</p>
 
-        <p class="font-bold">Assets</p>
-        <p v-for="(asset, index) in assets" v-bind:key="index" class="capitalize">{{ asset[0] }}</p>
+          <p class="font-bold">Assets</p>
+          <p v-for="(asset, index) in assets" v-bind:key="index" class="capitalize">{{ asset[0] }}</p>
 
-        <p class="font-bold mt-5">Liabilities</p>
-        <p v-for="(liability, index) in liabilities" v-bind:key="index" class="capitalize">{{ liability[0] }}</p>
+          <p class="font-bold mt-5">Liabilities</p>
+          <p v-for="(liability, index) in liabilities" v-bind:key="index" class="capitalize">{{ liability[0] }}</p>
 
-        <p class="font-bold mt-5">Equity</p>
-        <p v-for="(equityEntry, index) in equity" v-bind:key="index" class="capitalize">{{ equityEntry[0] }}</p>
+          <p class="font-bold mt-5">Equity</p>
+          <p v-for="(equityEntry, index) in equity" v-bind:key="index" class="capitalize">{{ equityEntry[0] }}</p>
 
-        <p class="font-bold mt-5">Net</p>
+          <p class="font-bold mt-5">Net</p>
 
-      </div>
+        </div>
 
-      <div class="grow"></div>
+        <div class="grow"></div>
 
-      <div v-for="(period, index) in headers" v-bind:key="index" class="flex flex-col basis-1/6 shrink-0 items-end pr-10">
-        <p class="font-bold">{{period}}</p>
+        <div v-for="(period, index) in headers" v-bind:key="index" class="flex flex-col basis-1/6 shrink-0 items-end pr-10">
+          <p class="font-bold">{{period}}</p>
 
-        <p class="opacity-0">Hidden</p>
-        <p v-for="(asset, assetIndex) in assets" v-bind:key="assetIndex" class="capitalize">{{ asset[index+1] }}</p>
+          <p class="opacity-0">Hidden</p>
+          <p v-for="(asset, assetIndex) in assets" v-bind:key="assetIndex" class="capitalize">{{ asset[index+1] }}</p>
 
-        <p class="opacity-0 mt-5">Hidden</p>
-        <p v-for="(liability, liabilityIndex) in liabilities" v-bind:key="liabilityIndex" class="capitalize">{{ liability[index+1] }}</p>
+          <p class="opacity-0 mt-5">Hidden</p>
+          <p v-for="(liability, liabilityIndex) in liabilities" v-bind:key="liabilityIndex" class="capitalize">{{ liability[index+1] }}</p>
 
-        <p class="opacity-0 mt-5">Hidden</p>
-        <p v-for="(equityEntry, equityIndex) in equity" v-bind:key="equityIndex" class="capitalize">{{ equityEntry[index+1] }}</p>
+          <p class="opacity-0 mt-5">Hidden</p>
+          <p v-for="(equityEntry, equityIndex) in equity" v-bind:key="equityIndex" class="capitalize">{{ equityEntry[index+1] }}</p>
 
-        <p class="mt-5">{{ net[index+1] }}</p>
+          <p class="mt-5">{{ net[index+1] }}</p>
 
+        </div>
       </div>
     </div>
     <vue-to-print
       :content="getComponentToPrint"
       document-title="Balance Sheet"
       remove-after-print
+      pageStyle="p {display: block !important;}"
     >
       <template #trigger>
         <div class="w-full flex justify-end">
