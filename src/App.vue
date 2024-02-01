@@ -1,11 +1,12 @@
 <script async setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useRoute } from "vue-router";
-import { RouterLink, RouterView } from 'vue-router'
 
 const menuOpen = ref(false)
 
 const route = useRoute();
+
+const isGraphPage = computed(() => useRoute().path.toString().indexOf("graphs") != -1)
 
 watch(
   () => route.fullPath,
@@ -26,7 +27,7 @@ watch(
       </div>
     </header>
     <div class="w-screen flex flex-grow relative overflow-hidden">
-      <div class="w-3/4 md:w-1/4 p-5 border-r-2 absolute top-0 bottom-0 overflow-scroll md:translate-x-0 transition-all ease-in-out delay-150" :class="menuOpen === true ? 'translate-x-0' : '-translate-x-full'">
+      <div class="w-3/4 md:w-1/4 p-5 border-r-2 absolute top-0 bottom-0 overflow-scroll md:translate-x-0 transition-all ease-in-out delay-150" :class="{'translate-x-0': menuOpen, '-translate-x-full': !menuOpen, 'overflow-hidder': isGraphPage}">
           <p class="text-lg font-medium">Statements</p>
           <router-link to="/balance-sheet"><div class="hover:bg-slate-200 ml-5 h-10 p-2 rounded-lg flex items-center"><p>Balance Sheet</p></div></router-link>
           <router-link to="/balance-sheet-equity"><div class="hover:bg-slate-200 ml-5 h-10 p-2 rounded-lg flex items-center"><p>Balance Sheet Equity</p></div></router-link>
