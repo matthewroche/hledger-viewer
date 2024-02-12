@@ -42,3 +42,10 @@ The app uses a traditional [Vue](https://vuejs.org) app structure. All the serve
 First pull the project. Run `npm install` to install the dependencies locally. `node server.js` will start the server. `npm run dev` will then get the frontend running. The development site is served on port 5173.
 
 To build the binaries make sure you have [pkg](https://github.com/vercel/pkg) available and type `npm run build-release.` A build folder containing the binaries will be produced.
+
+## More pictures
+
+![Screenshot 2024-02-12 at 12 18 42](https://github.com/matthewroche/hledger-viewer/assets/7015238/458a10f0-996a-4716-a647-3fa08d8c72d7)
+![Screenshot 2024-02-12 at 12 18 19](https://github.com/matthewroche/hledger-viewer/assets/7015238/d794d280-3b29-4e89-8786-d66a072a58d5)
+![Screenshot 2024-02-12 at 12 17 51](https://github.com/matthewroche/hledger-viewer/assets/7015238/7f0fd56f-9a25-4ccd-96ce-d6e0f2d03b79)
+
