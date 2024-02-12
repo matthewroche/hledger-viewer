@@ -37,6 +37,8 @@ This is a very simple app. The server is written in javascript using [express](h
 ## Contributing
 hledger-viewer was started as a hobby project by a self-taught coder with no professional experience. The code is average at best and likely laden with bugs. With that caveat, if you wish to contribute feel free to send a pull request. 
 
-The app uses a traditional [Vue](https://vuejs.org) app structure. All the server code is held within `server.js`. `npm run dev`will get you going once you have pulled the project locally. The development site is served on port 5173.
+The app uses a traditional [Vue](https://vuejs.org) app structure. All the server code is held within `server.js`. 
+
+First pull the project. Run `npm install` to install the dependencies locally. `node server.js` will start the server. `npm run dev` will then get the frontend running. The development site is served on port 5173.
 
 To build the binaries make sure you have [pkg](https://github.com/vercel/pkg) available and type `npm run build-release.` A build folder containing the binaries will be produced.
