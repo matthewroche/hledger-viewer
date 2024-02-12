@@ -1,4 +1,6 @@
-#  # HLedger Viewer
+# HLedger Viewer
+
+![Screenshot 2024-02-12 at 12 17 23](https://github.com/matthewroche/hledger-viewer/assets/7015238/456f799d-0e42-4c89-a021-743dcd9cba54)
 
 ## What is hledger?
 [hledger](https://hledger.org) is a terminal based program enabling double entry accounting on the command line, following the [Plain Text Accounting](https://plaintextaccounting.org) philosophy. In their own words hledger is “free GPL-licensed accounting software that runs on unix, mac, windows and the web based on readable, version-controllable, future-proof plain text files”
